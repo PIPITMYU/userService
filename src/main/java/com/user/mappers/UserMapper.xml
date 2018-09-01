@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.dao.UserDao">
+	<select id="findUserByOpenId" resultType="com.user.entity.User">
+		select * from USER_INFO where OPENID = #{openId}
+	</select>
+	<insert id="insertUser" parameterType="map">
+		 INSERT INTO USER_INFO(
+           OPENID,TID,USERID,UPDATETIME,MONEY
+        )
+        VALUES (
+           #{openId},#{tId},#{userId},#{updateTime},#{money}
+        )
+	</insert>
+	<select id="isExistUserId" parameterType="java.lang.String" resultType="java.lang.String">
+		select openId from USER_INFO where USERID = #{userId}
+	</select>
+	<select id="findTID" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		SELECT TID from GAME_CONF where CID = #{cId}
+	</select>
+	<select id="findUserId" resultType="java.lang.String">
+		SELECT USERID from USER_INFO where TID = #{tId} and OPENID = #{openId}
+	</select>
+	<select id="findMoney" resultType="java.lang.Integer">
+		SELECT MONEY FROM USER_INFO where TID = #{tId} and USERID = #{userId}
+	</select>
+</mapper>
